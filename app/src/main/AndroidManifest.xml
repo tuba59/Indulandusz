@@ -9,15 +9,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:name="com.orm.SugarApp">
-        <activity android:name=".MainActivity">
+        <activity android:name=".Main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SearchResultsActivity" />
-        <activity android:name=".DetailsActivity"></activity>
+        <activity android:name=".SearchResults.SearchResultsActivity" />
+        <activity android:name=".Details.DetailsActivity"></activity>
 
         <meta-data android:name="DATABASE" android:value="indulandusz.db" />
         <meta-data android:name="VERSION" android:value="1" />

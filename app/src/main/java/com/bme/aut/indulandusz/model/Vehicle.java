@@ -1,11 +1,14 @@
 package com.bme.aut.indulandusz.model;
 
-import com.orm.SugarRecord;
-
-public class Vehicle extends SugarRecord {
+public class Vehicle {
 
     private String type;
     private String name;
     private String id;
 
+    public Vehicle(String type_, String name_, String id_){
+        type = type_;
+        name = name_;
+        id = id_;
+    }
 }
