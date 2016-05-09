@@ -6,7 +6,7 @@ swagger: '2.0'
 # This is your document metadata
 info:
   version: "1.0.0"
-  title: Indulandusz API
+  title: IndulanduszAPI
 # the domain of the service
 host: futar.bkk.hu
 # array of all schemes that your API supports
@@ -54,25 +54,16 @@ paths:
           description: the search criteria
           required: false
           type: string
-      # Expected responses
       # Expected responses for this operation:
       responses:
         # Response code
         200:
-          description: Successful response
-          # A schema describing your response object.
-          # Use JSON Schema format
+          description: An array of products
           schema:
-            title: ArrayOfResults
             type: array
             items:
-              title: Results
-              type: object
-              properties:
-                name:
-                  type: string
-                single:
-                  type: boolean
+              $ref: '#/definitions/SearchResult'
+
   /stops-for-location.json:
       # This is a HTTP operation
     get:
@@ -122,20 +113,11 @@ paths:
       responses:
         # Response code
         200:
-          description: Successful response
-          # A schema describing your response object.
-          # Use JSON Schema format
+          description: An array of products
           schema:
-            title: ArrayOfResults
             type: array
             items:
-              title: Results
-              type: object
-              properties:
-                name:
-                  type: string
-                single:
-                  type: boolean
+              $ref: '#/definitions/StopsForLocationResult'
   /arrivals-and-departures-for-stop.json:
    # This is a HTTP operation
     get:
@@ -180,20 +162,11 @@ paths:
       responses:
         # Response code
         200:
-          description: Successful response
-          # A schema describing your response object.
-          # Use JSON Schema format
+          description: An array of products
           schema:
-            title: ArrayOfResults
             type: array
             items:
-              title: Results
-              type: object
-              properties:
-                name:
-                  type: string
-                single:
-                  type: boolean
+              $ref: '#/definitions/ArrivalsAndDeparturesForStopResult'
   /schedule-for-stop.json:
    # This is a HTTP operation
     get:
@@ -243,17 +216,73 @@ paths:
       responses:
         # Response code
         200:
-          description: Successful response
-          # A schema describing your response object.
-          # Use JSON Schema format
+          description: An array of products
           schema:
-            title: ArrayOfResults
             type: array
             items:
-              title: Results
-              type: object
-              properties:
-                name:
-                  type: string
-                single:
-                  type: boolean
+              $ref: '#/definitions/ScheduleForStopResult'
+definitions:
+  SearchResult:
+    type: object
+    properties:
+      query:
+        type: string
+        description: Search criteria
+      stopIds:
+        type: object
+        description: List of stop ids.
+      routeIds:
+        type: object
+        description: List of route ids.
+      alertIds:
+        type: object
+        description: Alerts
+  StopsForLocationResult:
+    type: object
+    properties:
+      id:
+        type: string
+      lat:
+        type: number
+      lon:
+        type: number
+      name:
+        type: string
+      code:
+        type: string
+      direction:
+        type: string
+      locationType:
+        type: number
+      parentStation:
+        type: string
+      type:
+        type: string
+      wheelchairBoarding:
+        type: string
+      routeIds:
+        type: object
+      stopColorType:
+        type: string
+  ArrivalsAndDeparturesForStopResult:
+    type: object
+    properties:
+      stopId:
+        type: string
+      alertIds:
+        type: object
+      nearbyStopIds:
+        type: number
+      stopTimes:
+        type: object
+  ScheduleForStopResult:
+    type: object
+    properties:
+      stopId:
+        type: string
+      serviceDate:
+        type: string
+      alertIds:
+        type: object
+      schedules:
+        type: object
