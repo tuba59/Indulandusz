@@ -18,13 +18,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    productFlavors{ //if(BuildConfig.IS_MOCK){akkor vmi}
+    productFlavors{
         orm{
             buildConfigField "boolean", "IS_MOCK", "false"
         }
         mocked{
             buildConfigField "boolean", "IS_MOCK", "true"
         }
+    }
+    lintOptions{
+        abortOnError false
     }
 }
 
