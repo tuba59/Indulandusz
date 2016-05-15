@@ -4,6 +4,7 @@ import com.bme.aut.indulandusz.model.Stop;
 
 public interface DetailsScreen {
 
-    void showDetails(String stopId);
+    void showDetails();
     void addToFavorites(Stop stop);
+    void deleteFavorite(String stopId);
 }

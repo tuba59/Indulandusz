@@ -15,9 +15,9 @@ public class Stop extends SugarRecord {
         name = name_;
         id = id_;
         if(BuildConfig.IS_MOCK){
-            vehicleList.add(new Vehicle("bus", "8", "BKK_01"));
-            vehicleList.add(new Vehicle("tram", "61", "BKK_02"));
-            vehicleList.add(new Vehicle("tram", "17", "BKK_03"));
+            vehicleList.add(new Vehicle("bus", "8", "BKK_01", "4' 8' 12' 20'"));
+            vehicleList.add(new Vehicle("tram", "61", "BKK_02", "3' 11' 19'"));
+            vehicleList.add(new Vehicle("tram", "17", "BKK_03", "5' 9' 13' 21'"));
         }
         else
             vehicleList = vl;

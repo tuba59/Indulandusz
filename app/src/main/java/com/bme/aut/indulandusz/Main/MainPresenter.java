@@ -25,8 +25,5 @@ public class MainPresenter {
     public void showFavorites(){
         screen.showFavorites();
     }
-    public void deleteFavorite(String stopId){
-        screen.deleteFavorite(stopId);
-    }
 
 }

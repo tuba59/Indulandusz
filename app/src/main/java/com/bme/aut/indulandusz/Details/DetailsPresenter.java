@@ -24,12 +24,15 @@ public class DetailsPresenter {
         this.screen=null;
     }
 
-    public void showFavorites(String stopId){
-        screen.showDetails(stopId);
+    public void showDetails(String stopId){
+        screen.showDetails();
     }
 
     public void addToFavorites(Stop stop){
         screen.addToFavorites(stop);
+    }
+    public void deleteFavorite(String stopId){
+        screen.deleteFavorite(stopId);
     }
 
 }
