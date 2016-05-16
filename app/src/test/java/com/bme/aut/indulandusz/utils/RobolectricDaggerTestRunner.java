@@ -1,4 +1,4 @@
-package com.bme.aut.indulandusz;
+package com.bme.aut.indulandusz.utils;
 
 
 import org.junit.runners.model.InitializationError;
