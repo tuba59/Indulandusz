@@ -5,7 +5,7 @@ import android.content.Context;
 import com.bme.aut.indulandusz.Details.DetailsPresenter;
 import com.bme.aut.indulandusz.Main.MainPresenter;
 import com.bme.aut.indulandusz.model.Network;
-import com.bme.aut.indulandusz.utils.UiExecutor;
+import com.bme.aut.indulandusz.utils.UIExecutor;
 
 import java.util.concurrent.Executor;
 
@@ -44,7 +44,7 @@ public class TestModule {
     @Singleton
     @Network
     public Executor provideNetworkExecutor() {
-        return new UiExecutor();
+        return new UIExecutor();
     }
 
 

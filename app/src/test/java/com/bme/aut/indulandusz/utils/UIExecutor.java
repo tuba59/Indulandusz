@@ -6,11 +6,11 @@ import android.support.annotation.NonNull;
 
 import java.util.concurrent.Executor;
 
-public class UiExecutor implements Executor {
+public class UIExecutor implements Executor {
 
     private Handler mHandler;
 
-    public UiExecutor() {
+    public UIExecutor() {
         mHandler = new Handler(Looper.getMainLooper());
     }
 
