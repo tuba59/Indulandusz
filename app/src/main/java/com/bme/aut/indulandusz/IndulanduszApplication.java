@@ -1,8 +1,8 @@
 package com.bme.aut.indulandusz;
 
-import android.app.Application;
+import com.orm.SugarApp;
 
-public class IndulanduszApplication extends Application {
+public class IndulanduszApplication extends SugarApp {
 
     public static IndulanduszApplicationComponent injector;
 
