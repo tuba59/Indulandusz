@@ -78,4 +78,8 @@ dependencies {
         // Set this dependency to build and run UI Automator tests
         androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.2'
     }
+    compile 'com.google.android.gms:play-services-analytics:8.4.0'
+    compile 'com.google.android.gms:play-services:8.4.0'
+
 }
+apply plugin: 'com.google.gms.google-services'

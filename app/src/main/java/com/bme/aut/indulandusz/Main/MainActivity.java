@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -13,11 +14,14 @@ import android.widget.Toast;
 
 import com.bme.aut.indulandusz.BuildConfig;
 import com.bme.aut.indulandusz.Details.DetailsActivity;
+import com.bme.aut.indulandusz.IndulanduszApplication;
 import com.bme.aut.indulandusz.R;
 import com.bme.aut.indulandusz.SearchResults.SearchResultsActivity;
 import com.bme.aut.indulandusz.model.FavoriteAdapter;
 import com.bme.aut.indulandusz.model.RecyclerItemClickListener;
 import com.bme.aut.indulandusz.model.Stop;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
     private RecyclerView.LayoutManager mLayoutManager;
     private EditText searchField;
     private Button searchButton;
+    private Tracker mTracker;
+    private final String name = "MainActivity";
 
     @Inject
     MainPresenter mainPresenter;
@@ -41,6 +47,9 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        IndulanduszApplication application = (IndulanduszApplication) getApplication();
+        mTracker = application.getDefaultTracker();
+        mTracker.setScreenName(name);
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
@@ -108,6 +117,11 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
                 })
         );
 
+
+        mTracker.send(new HitBuilders.EventBuilder()
+                .setCategory("Action")
+                .setAction("Favorites shown")
+                .build());
     }
 
     @Override
@@ -116,4 +130,11 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
         showFavorites();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i("", "Setting screen name: " + name);
+        mTracker.setScreenName("Image~" + name);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+    }
 }

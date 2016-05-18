@@ -9,11 +9,14 @@ import android.view.View;
 
 import com.bme.aut.indulandusz.BuildConfig;
 import com.bme.aut.indulandusz.Details.DetailsActivity;
+import com.bme.aut.indulandusz.IndulanduszApplication;
 import com.bme.aut.indulandusz.Main.MainActivity;
 import com.bme.aut.indulandusz.R;
 import com.bme.aut.indulandusz.model.FavoriteAdapter;
 import com.bme.aut.indulandusz.model.RecyclerItemClickListener;
 import com.bme.aut.indulandusz.model.Stop;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,11 +28,17 @@ public class SearchResultsActivity extends AppCompatActivity implements SearchRe
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private FavoriteAdapter mAdapter;
+    private Tracker mTracker;
+    private final String name = "SearchResultsActivity";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_results);
+        IndulanduszApplication application = (IndulanduszApplication) getApplication();
+        mTracker = application.getDefaultTracker();
+        mTracker.setScreenName(name);
         Intent i = getIntent();
         String term = i.getExtras().getString("term");
         showSearchResults(term);
@@ -115,5 +124,9 @@ public class SearchResultsActivity extends AppCompatActivity implements SearchRe
             if(!isFound)
                 stop.save();
         }
+        mTracker.send(new HitBuilders.EventBuilder()
+                .setCategory("Action")
+                .setAction("New favorite added")
+                .build());
     }
 }

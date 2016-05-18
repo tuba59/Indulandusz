@@ -11,11 +11,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bme.aut.indulandusz.BuildConfig;
+import com.bme.aut.indulandusz.IndulanduszApplication;
 import com.bme.aut.indulandusz.Main.MainActivity;
 import com.bme.aut.indulandusz.R;
 import com.bme.aut.indulandusz.SearchResults.SearchResultsActivity;
 import com.bme.aut.indulandusz.model.DetailsAdapter;
 import com.bme.aut.indulandusz.model.Stop;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,11 +36,18 @@ public class DetailsActivity extends AppCompatActivity implements DetailsScreen 
     private int selectedItemPosition;
     public static boolean comingFromSearchActivity = false;
     private TextView detailedStopName;
+    private Tracker mTracker;
+    private final String name = "DetailsActivity";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
+        IndulanduszApplication application = (IndulanduszApplication) getApplication();
+        mTracker = application.getDefaultTracker();
+        mTracker.setScreenName(name);
+
         detailsPresenter.getInstance().attachView(this);
         detailedStopName = (TextView) findViewById(R.id.nameOfDetailedStop);
         showDetails();
@@ -134,6 +144,10 @@ public class DetailsActivity extends AppCompatActivity implements DetailsScreen 
             if(!isFound)
                 stop.save();
         }
+        mTracker.send(new HitBuilders.EventBuilder()
+                .setCategory("Action")
+                .setAction("Favorite added")
+                .build());
     }
 
     @Override
@@ -155,5 +169,10 @@ public class DetailsActivity extends AppCompatActivity implements DetailsScreen 
                     s.delete();
             }
         }
+
+        mTracker.send(new HitBuilders.EventBuilder()
+                .setCategory("Action")
+                .setAction("Favorite removed")
+                .build());
     }
 }

@@ -24,7 +24,7 @@ public class DetailsPresenter {
         this.screen=null;
     }
 
-    public void showDetails(String stopId){
+    public void showDetails(){
         screen.showDetails();
     }
 
