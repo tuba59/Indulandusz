@@ -2,9 +2,11 @@ package com.bme.aut.indulandusz;
 
 import android.app.Application;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Tracker;
 import com.orm.SugarApp;
+import io.fabric.sdk.android.Fabric;
 
 public class IndulanduszApplication extends SugarApp {
 
@@ -14,6 +16,7 @@ public class IndulanduszApplication extends SugarApp {
     @Override
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
 
         injector =
                 DaggerIndulanduszApplicationComponent.builder().

@@ -20,6 +20,7 @@ import com.bme.aut.indulandusz.SearchResults.SearchResultsActivity;
 import com.bme.aut.indulandusz.model.FavoriteAdapter;
 import com.bme.aut.indulandusz.model.RecyclerItemClickListener;
 import com.bme.aut.indulandusz.model.Stop;
+import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
@@ -27,6 +28,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+
+import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity implements MainScreen {
 
@@ -47,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Fabric.with(this, new Crashlytics());
         IndulanduszApplication application = (IndulanduszApplication) getApplication();
         mTracker = application.getDefaultTracker();
         mTracker.setScreenName(name);
@@ -70,6 +74,8 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
 
             }
         });
+        logUser();
+
     }
 
     public List<Stop> getFavorites(){
@@ -137,4 +143,17 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
         mTracker.setScreenName("Image~" + name);
         mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
+
+    public void forceCrash(View view) {
+        throw new RuntimeException("This is a crash");
+    }
+
+    private void logUser() {
+        // TODO: Use the current user's information
+        // You can call any combination of these three methods
+        Crashlytics.setUserIdentifier("12345");
+        Crashlytics.setUserEmail("user@fabric.io");
+        Crashlytics.setUserName("Test User");
+    }
+
 }

@@ -26,6 +26,9 @@
         <meta-data android:name="VERSION" android:value="1" />
         <meta-data android:name="QUERY_LOG" android:value="true" />
         <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="com.bme.aut.indulandusz.model" />
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="91c42d3505c85066def03d2bb4aa397a5598bb6f" />
     </application>
 
 </manifest>
